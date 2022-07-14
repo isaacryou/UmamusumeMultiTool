@@ -154,10 +154,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             textDisplayBoxes[i] = WindowElements::TextDisplayBox::TextDisplayBox(
                 hWnd,
                 hInst,
+                hdc,
                 textBoxInitialX, textBoxInitialY + (i * (textBoxInitialHeight + textBoxDistanceBetweenY)),
                 textBoxInitialWidth,
-                textBoxInitialHeight);
+                textBoxInitialHeight, false, "Editable text");
         }
+
+        WindowElements::TextDisplayBox::TextDisplayBox(hWnd, hInst, hdc, 200, 200, 100, 100, true, "Read only text");
 
         EndPaint(hWnd, &ps);
         break;

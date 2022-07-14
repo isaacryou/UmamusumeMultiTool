@@ -2,6 +2,7 @@
 #include <stdlib.h>;
 #include <string>;
 #include <windows.h>;
+#include <tchar.h>;
 
 namespace WindowElements
 {
@@ -9,14 +10,15 @@ namespace WindowElements
 	{
 	public:
 		TextDisplayBox();
-		TextDisplayBox(HWND, HINSTANCE, int, int, int, int);
+		TextDisplayBox(HWND, HINSTANCE, HDC, int, int, int, int, bool = false, std::string = "");
+		void CleanOut();
 
 	private:
 		int x;
 		int y;
 		int width;
 		int height;
-		std::string message;
+		TCHAR* messageToShow;
 	};
 
 	class SearchBox
@@ -54,7 +56,6 @@ namespace WindowElements
 	{
 	public:
 		ResetButton(HWND, int, int, int, int);
-
 	};
 }
 

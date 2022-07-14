@@ -4,4 +4,13 @@ D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\MainWindow.h(2,10): warning
 D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\MainWindow.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\MainWindow.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\MainWindow.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\WindowElements.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\WindowElements.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\WindowElements.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\MainWindow.cpp(168,9): warning C4060: switch statement contains no 'case' or 'default' labels
+  WindowElements.cpp
+D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\WindowElements.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\WindowElements.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\WindowElements.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Generating Code...
   UmamusumeMultiTool.vcxproj -> D:\Development\UmamusumeMultiTool\Debug\UmamusumeMultiTool.exe

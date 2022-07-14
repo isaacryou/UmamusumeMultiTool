@@ -1,7 +1,19 @@
 #include "MainWindow.h"
+#include "WindowElements.h"
 
-static TCHAR szWindowClass[] = _T("DesktopApp");
-static TCHAR szTitle[] = _T("Windows Desktop Guided Tour Application");
+const int windowWidth = 960;
+const int windowHeight = 540;
+const int numberOfTextDisplayBoxes = 5; //Defines the number of boxes that will show the text
+const int textBoxInitialX = 100;
+const int textBoxInitialY = 20;
+const int textBoxInitialWidth = 100;
+const int textBoxInitialHeight = 20;
+const int textBoxDistanceBetweenY = 40;
+
+static TCHAR szWindowClass[] = _T("UMT");
+static TCHAR szTitle[] = _T("Umamusume Multitool");
+
+WindowElements::TextDisplayBox textDisplayBoxes[numberOfTextDisplayBoxes];
 
 HINSTANCE hInst;
 
@@ -49,7 +61,7 @@ int WINAPI WinMain(
     {
         MessageBox(NULL,
             _T("Call to RegisterClassEx failed!"),
-            _T("Windows Desktop Guided Tour"),
+            _T("Umamusume Multitool Main Window"),
             NULL);
 
         return 1;
@@ -75,7 +87,7 @@ int WINAPI WinMain(
         szTitle,
         WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT,
-        500, 100,
+        windowWidth, windowHeight,
         NULL,
         NULL,
         hInstance,
@@ -86,7 +98,7 @@ int WINAPI WinMain(
     {
         MessageBox(NULL,
             _T("Call to CreateWindow failed!"),
-            _T("Windows Desktop Guided Tour"),
+            _T("Umamusume Multitool Main Window"),
             NULL);
 
         return 1;
@@ -109,8 +121,6 @@ int WINAPI WinMain(
 
     return (int)msg.wParam;
 }
-
-
 
 //  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)
 //
@@ -139,8 +149,26 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             greeting, _tcslen(greeting));
         // End application-specific layout section.
 
+        for (int i = 0; i < numberOfTextDisplayBoxes; i++)
+        {
+            textDisplayBoxes[i] = WindowElements::TextDisplayBox::TextDisplayBox(
+                hWnd,
+                hInst,
+                textBoxInitialX, textBoxInitialY + (i * (textBoxInitialHeight + textBoxDistanceBetweenY)),
+                textBoxInitialWidth,
+                textBoxInitialHeight);
+        }
+
         EndPaint(hWnd, &ps);
         break;
+
+    case WM_COMMAND:
+        switch (LOWORD(wParam))
+        {
+        }
+
+        break;
+
     case WM_DESTROY:
         PostQuitMessage(0);
         break;

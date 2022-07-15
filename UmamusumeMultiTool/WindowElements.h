@@ -11,14 +11,15 @@ namespace WindowElements
 	public:
 		TextDisplayBox();
 		TextDisplayBox(HWND, HINSTANCE, HDC, int, int, int, int, bool = false, std::string = "");
-		void CleanOut();
+
+		void UpdateDisplayValue(std::string = "");
 
 	private:
 		int x;
 		int y;
 		int width;
 		int height;
-		TCHAR* messageToShow;
+		HWND textDisplayBox;
 	};
 
 	class SearchBox

@@ -17,6 +17,9 @@ WindowElements::TextDisplayBox textDisplayBoxes[numberOfTextDisplayBoxes];
 
 HINSTANCE hInst;
 
+HWND hwndCaptureButton;
+HWND hwndTextBox;
+
 //This is the function that creates the window
 int WINAPI WinMain(
 	_In_ HINSTANCE hInstance,
@@ -104,6 +107,20 @@ int WINAPI WinMain(
         return 1;
     }
 
+    hwndCaptureButton = CreateWindow(
+        L"BUTTON",  // Predefined class; Unicode assumed 
+        L"Capture Screen",      // Button text 
+        WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
+        200,         // x position 
+        10,         // y position 
+        100,        // Button width
+        100,        // Button height
+        hWnd,     // Parent window
+        (HMENU)BUTTON_CAPTURE_SCREEN,       // No menu.
+        (HINSTANCE)GetWindowLongPtr(hWnd, GWLP_HINSTANCE),
+        NULL);      // Pointer not needed.
+
+
     // The parameters to ShowWindow explained:
     // hWnd: the value returned from CreateWindow
     // nCmdShow: the fourth parameter from WinMain
@@ -134,33 +151,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     PAINTSTRUCT ps;
     HDC hdc;
-    TCHAR greeting[] = _T("Hello, Windows desktop!");
 
     switch (message)
     {
     case WM_PAINT:
         hdc = BeginPaint(hWnd, &ps);
 
-        // Here your application is laid out.
-        // For this introduction, we just print out "Hello, Windows desktop!"
-        // in the top left corner.
-        TextOut(hdc,
-            5, 5,
-            greeting, _tcslen(greeting));
-        // End application-specific layout section.
+        WindowElements::TextDisplayBox::TextDisplayBox(hWnd, hInst, hdc, 100, 100, 100, 100, true, "Read only text");
 
-        for (int i = 0; i < numberOfTextDisplayBoxes; i++)
-        {
-            textDisplayBoxes[i] = WindowElements::TextDisplayBox::TextDisplayBox(
-                hWnd,
-                hInst,
-                hdc,
-                textBoxInitialX, textBoxInitialY + (i * (textBoxInitialHeight + textBoxDistanceBetweenY)),
-                textBoxInitialWidth,
-                textBoxInitialHeight, false, "Editable text");
-        }
-
-        WindowElements::TextDisplayBox::TextDisplayBox(hWnd, hInst, hdc, 200, 200, 100, 100, true, "Read only text");
+        textDisplayBoxes[0] = WindowElements::TextDisplayBox::TextDisplayBox(
+            hWnd,
+            hInst,
+            hdc,
+            100, 150,
+            500,
+            300, false, "");
 
         EndPaint(hWnd, &ps);
         break;
@@ -168,6 +173,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_COMMAND:
         switch (LOWORD(wParam))
         {
+        case BUTTON_CAPTURE_SCREEN:
+            textDisplayBoxes[0].UpdateDisplayValue("Updated through button");
+            break;
         }
 
         break;

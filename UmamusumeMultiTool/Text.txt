@@ -47,3 +47,15 @@ case WM_COMMAND:
         }
 
         break;
+
+        /*Editable text box*/
+for (int i = 0; i < numberOfTextDisplayBoxes; i++)
+        {
+            textDisplayBoxes[i] = WindowElements::TextDisplayBox::TextDisplayBox(
+                hWnd,
+                hInst,
+                hdc,
+                textBoxInitialX, textBoxInitialY + (i * (textBoxInitialHeight + textBoxDistanceBetweenY)),
+                textBoxInitialWidth,
+                textBoxInitialHeight, false, "Editable text");
+        }

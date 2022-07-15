@@ -13,7 +13,6 @@ TextDisplayBox::TextDisplayBox(HWND hWnd, HINSTANCE hInstance, HDC hdc, int x, i
 	this->y = y;
 	this->width = width;
 	this->height = height;
-	this->messageToShow = textToShow;
 
 	if (isReadonly == true)
 	{
@@ -23,7 +22,7 @@ TextDisplayBox::TextDisplayBox(HWND hWnd, HINSTANCE hInstance, HDC hdc, int x, i
 	}
 	else
 	{
-		CreateWindowEx(
+		this->textDisplayBox = CreateWindowEx(
 			WS_EX_CLIENTEDGE,
 			TEXT("Edit"), //Type of the window
 			textToShow, //Text on the window
@@ -38,9 +37,19 @@ TextDisplayBox::TextDisplayBox(HWND hWnd, HINSTANCE hInstance, HDC hdc, int x, i
 			NULL
 		);
 	}
+
+	delete[] textToShow;
 }
 
 TextDisplayBox::TextDisplayBox()
 {
 
+}
+
+void TextDisplayBox::UpdateDisplayValue(std::string _textToUpdate)
+{
+	SetWindowTextA(
+		this->textDisplayBox,
+		_textToUpdate.c_str()
+	);
 }

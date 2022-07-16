@@ -4,6 +4,7 @@
 #include <stdlib.h>;
 #include <string.h>;
 
+#define TIMER_FIND_UMAMUSUME_WINDOW 20
 #define BUTTON_CAPTURE_SCREEN 10
 
 int WINAPI WinMain(
@@ -19,4 +20,3 @@ LRESULT CALLBACK WndProc(
 	_In_ WPARAM wParam,
 	_In_ LPARAM lParam
 );
-

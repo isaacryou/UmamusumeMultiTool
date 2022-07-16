@@ -6,6 +6,13 @@
 
 namespace WindowElements
 {
+	class WindowHelper
+	{
+	public: 
+		static std::string GetActiveWindowTitleString();
+		static void GetWindowPos(HWND, int*, int*);
+	};
+
 	class TextDisplayBox
 	{
 	public:

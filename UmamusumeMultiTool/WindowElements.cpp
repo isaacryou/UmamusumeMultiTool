@@ -53,3 +53,21 @@ void TextDisplayBox::UpdateDisplayValue(std::string _textToUpdate)
 		_textToUpdate.c_str()
 	);
 }
+
+std::string WindowHelper::GetActiveWindowTitleString()
+{
+	char wnd_title[256];
+	HWND hwnd = GetForegroundWindow();
+	GetWindowTextA(hwnd, wnd_title, sizeof(wnd_title));
+	return wnd_title;
+}
+
+void WindowHelper::GetWindowPos(HWND _hwnd, int* _x, int* _y)
+{
+	RECT rect = { NULL };
+	if (GetWindowRect(_hwnd, &rect))
+	{
+		*_x = rect.left;
+		*_y = rect.top;
+	}
+}

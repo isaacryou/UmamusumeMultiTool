@@ -1,5 +1,6 @@
 #include "MainWindow.h"
 #include "WindowElements.h"
+#include "CaptureScreen.h"
 
 const int windowWidth = 960;
 const int windowHeight = 540;
@@ -10,8 +11,11 @@ const int textBoxInitialWidth = 100;
 const int textBoxInitialHeight = 20;
 const int textBoxDistanceBetweenY = 40;
 
+const std::string umamusumeTitle = "umamusume";
+
 static TCHAR szWindowClass[] = _T("UMT");
 static TCHAR szTitle[] = _T("Umamusume Multitool");
+
 
 WindowElements::TextDisplayBox textDisplayBoxes[numberOfTextDisplayBoxes];
 
@@ -19,6 +23,7 @@ HINSTANCE hInst;
 
 HWND hwndCaptureButton;
 HWND hwndTextBox;
+HWND hwndUmamusumeWindow;
 
 //This is the function that creates the window
 int WINAPI WinMain(
@@ -151,9 +156,27 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     PAINTSTRUCT ps;
     HDC hdc;
+    int x, y;
 
     switch (message)
     {
+    case WM_CREATE:
+        SetTimer(hWnd, TIMER_FIND_UMAMUSUME_WINDOW, 20, NULL);
+        break;
+    case WM_TIMER:
+        if (WindowElements::WindowHelper::GetActiveWindowTitleString().compare(umamusumeTitle) == 0)
+        {
+            hwndUmamusumeWindow = GetForegroundWindow();
+
+            WindowElements::WindowHelper::GetWindowPos(hwndUmamusumeWindow, &x, &y);
+
+            textDisplayBoxes[1].UpdateDisplayValue(std::to_string(x));
+        }
+        else
+        {
+            textDisplayBoxes[1].UpdateDisplayValue("Window not found");
+        }
+        break;
     case WM_PAINT:
         hdc = BeginPaint(hWnd, &ps);
 
@@ -165,7 +188,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             hdc,
             100, 150,
             500,
-            300, false, "");
+            200, false, "");
+
+        textDisplayBoxes[1] = WindowElements::TextDisplayBox::TextDisplayBox(
+            hWnd,
+            hInst,
+            hdc,
+            100, 300,
+            500,
+            200, false, "");
 
         EndPaint(hWnd, &ps);
         break;
@@ -174,7 +205,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         switch (LOWORD(wParam))
         {
         case BUTTON_CAPTURE_SCREEN:
-            textDisplayBoxes[0].UpdateDisplayValue("Updated through button");
+
+            textDisplayBoxes[0].UpdateDisplayValue("Button Pressed");
+
+            cv::Mat src = CaptureScreen::CaptureWindowForOcr::CaptureWindow(GetDesktopWindow(), 500, 500, 500, 500);
+
+            cv::imwrite("Screenshot2.png", src);
+
+            std::vector<uchar> buf;
+            cv::imencode(".png", src, buf);
+
+            buf.clear();
+
             break;
         }
 
@@ -190,3 +232,4 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
     return 0;
 }
+

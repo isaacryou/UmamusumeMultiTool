@@ -1,17 +1,9 @@
-﻿  MainWindow.cpp
-D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\MainWindow.h(1,9): warning C4068: unknown pragma 'on'
-D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\MainWindow.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\MainWindow.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\MainWindow.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\MainWindow.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\WindowElements.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\WindowElements.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\WindowElements.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\WindowElements.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  WindowElements.cpp
-D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\WindowElements.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\WindowElements.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\WindowElements.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\Development\UmamusumeMultiTool\UmamusumeMultiTool\WindowElements.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  Generating Code...
-  UmamusumeMultiTool.vcxproj -> D:\Development\UmamusumeMultiTool\Debug\UmamusumeMultiTool.exe
+﻿  CaptureScreen.cpp
+CaptureScreen.obj : error LNK2019: unresolved external symbol "public: __thiscall cv::Mat::Mat(void)" (??0Mat@cv@@QAE@XZ) referenced in function "public: class cv::Mat __thiscall CaptureScreen::CaptureWindowForOcr::CaptureWindow(struct HWND__ *,int,int,int,int)" (?CaptureWindow@CaptureWindowForOcr@CaptureScreen@@QAE?AVMat@cv@@PAUHWND__@@HHHH@Z)
+CaptureScreen.obj : error LNK2019: unresolved external symbol "public: __thiscall cv::Mat::~Mat(void)" (??1Mat@cv@@QAE@XZ) referenced in function "public: class cv::Mat __thiscall CaptureScreen::CaptureWindowForOcr::CaptureWindow(struct HWND__ *,int,int,int,int)" (?CaptureWindow@CaptureWindowForOcr@CaptureScreen@@QAE?AVMat@cv@@PAUHWND__@@HHHH@Z)
+CaptureScreen.obj : error LNK2019: unresolved external symbol "public: __thiscall cv::Mat::Mat(class cv::Mat &&)" (??0Mat@cv@@QAE@$$QAV01@@Z) referenced in function "public: class cv::Mat __thiscall CaptureScreen::CaptureWindowForOcr::CaptureWindow(struct HWND__ *,int,int,int,int)" (?CaptureWindow@CaptureWindowForOcr@CaptureScreen@@QAE?AVMat@cv@@PAUHWND__@@HHHH@Z)
+D:\Development\opencv\lib\install\opencv\x64\vc16\lib\opencv_img_hash460.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+D:\Development\opencv\lib\install\opencv\x64\vc16\lib\opencv_img_hash460d.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+D:\Development\opencv\lib\install\opencv\x64\vc16\lib\opencv_world460.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+D:\Development\opencv\lib\install\opencv\x64\vc16\lib\opencv_world460d.lib : warning LNK4272: library machine type 'x64' conflicts with target machine type 'x86'
+D:\Development\UmamusumeMultiTool\Debug\UmamusumeMultiTool.exe : fatal error LNK1120: 3 unresolved externals

@@ -1,9 +1,24 @@
 #include "MainWindow.h"
+#include "WindowElements.h"
 
-static TCHAR szWindowClass[] = _T("DesktopApp");
-static TCHAR szTitle[] = _T("Windows Desktop Guided Tour Application");
+const int windowWidth = 960;
+const int windowHeight = 540;
+const int numberOfTextDisplayBoxes = 5; //Defines the number of boxes that will show the text
+const int textBoxInitialX = 100;
+const int textBoxInitialY = 20;
+const int textBoxInitialWidth = 100;
+const int textBoxInitialHeight = 20;
+const int textBoxDistanceBetweenY = 40;
+
+static TCHAR szWindowClass[] = _T("UMT");
+static TCHAR szTitle[] = _T("Umamusume Multitool");
+
+WindowElements::TextDisplayBox textDisplayBoxes[numberOfTextDisplayBoxes];
 
 HINSTANCE hInst;
+
+HWND hwndCaptureButton;
+HWND hwndTextBox;
 
 //This is the function that creates the window
 int WINAPI WinMain(
@@ -49,7 +64,7 @@ int WINAPI WinMain(
     {
         MessageBox(NULL,
             _T("Call to RegisterClassEx failed!"),
-            _T("Windows Desktop Guided Tour"),
+            _T("Umamusume Multitool Main Window"),
             NULL);
 
         return 1;
@@ -75,7 +90,7 @@ int WINAPI WinMain(
         szTitle,
         WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, CW_USEDEFAULT,
-        500, 100,
+        windowWidth, windowHeight,
         NULL,
         NULL,
         hInstance,
@@ -86,11 +101,25 @@ int WINAPI WinMain(
     {
         MessageBox(NULL,
             _T("Call to CreateWindow failed!"),
-            _T("Windows Desktop Guided Tour"),
+            _T("Umamusume Multitool Main Window"),
             NULL);
 
         return 1;
     }
+
+    hwndCaptureButton = CreateWindow(
+        L"BUTTON",  // Predefined class; Unicode assumed 
+        L"Capture Screen",      // Button text 
+        WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
+        200,         // x position 
+        10,         // y position 
+        100,        // Button width
+        100,        // Button height
+        hWnd,     // Parent window
+        (HMENU)BUTTON_CAPTURE_SCREEN,       // No menu.
+        (HINSTANCE)GetWindowLongPtr(hWnd, GWLP_HINSTANCE),
+        NULL);      // Pointer not needed.
+
 
     // The parameters to ShowWindow explained:
     // hWnd: the value returned from CreateWindow
@@ -110,8 +139,6 @@ int WINAPI WinMain(
     return (int)msg.wParam;
 }
 
-
-
 //  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)
 //
 //  PURPOSE:  Processes messages for the main window.
@@ -124,23 +151,35 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     PAINTSTRUCT ps;
     HDC hdc;
-    TCHAR greeting[] = _T("Hello, Windows desktop!");
 
     switch (message)
     {
     case WM_PAINT:
         hdc = BeginPaint(hWnd, &ps);
 
-        // Here your application is laid out.
-        // For this introduction, we just print out "Hello, Windows desktop!"
-        // in the top left corner.
-        TextOut(hdc,
-            5, 5,
-            greeting, _tcslen(greeting));
-        // End application-specific layout section.
+        WindowElements::TextDisplayBox::TextDisplayBox(hWnd, hInst, hdc, 100, 100, 100, 100, true, "Read only text");
+
+        textDisplayBoxes[0] = WindowElements::TextDisplayBox::TextDisplayBox(
+            hWnd,
+            hInst,
+            hdc,
+            100, 150,
+            500,
+            300, false, "");
 
         EndPaint(hWnd, &ps);
         break;
+
+    case WM_COMMAND:
+        switch (LOWORD(wParam))
+        {
+        case BUTTON_CAPTURE_SCREEN:
+            textDisplayBoxes[0].UpdateDisplayValue("Updated through button");
+            break;
+        }
+
+        break;
+
     case WM_DESTROY:
         PostQuitMessage(0);
         break;

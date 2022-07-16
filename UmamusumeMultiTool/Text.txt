@@ -1,0 +1,61 @@
+This is where I will dump all tips and tricks I find for the later use:
+
+Converting int into LPCWSTR:
+
+wchar_t buffer[256];
+wsprintfW(buffer, L"%d", testFunction());
+TextOut(hdc,
+            100, 100,
+            buffer, _tcslen(buffer));
+
+
+Button:
+
+//TEST VALUE STARTS
+#define TEST_BUTTON 10
+//TEST VALUE ENDS
+
+
+//FOR THE TESTING PURPOSE
+
+HWND hwndButton;
+
+//END OF THE TESTING PURPOSE
+
+//FOR THE TESTING PURPOSE
+
+        hwndButton = CreateWindow(
+            L"BUTTON",  // Predefined class; Unicode assumed 
+            L"OK",      // Button text 
+            WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
+            200,         // x position 
+            10,         // y position 
+            100,        // Button width
+            100,        // Button height
+            hWnd,     // Parent window
+            (HMENU) TEST_BUTTON,       // No menu.
+            (HINSTANCE)GetWindowLongPtr(hWnd, GWLP_HINSTANCE),
+            NULL);      // Pointer not needed.
+
+        //END OF TESTING PURPOSE
+
+case WM_COMMAND:
+        switch (LOWORD(wParam))
+        {
+        case TEST_BUTTON:
+            break;
+        }
+
+        break;
+
+        /*Editable text box*/
+for (int i = 0; i < numberOfTextDisplayBoxes; i++)
+        {
+            textDisplayBoxes[i] = WindowElements::TextDisplayBox::TextDisplayBox(
+                hWnd,
+                hInst,
+                hdc,
+                textBoxInitialX, textBoxInitialY + (i * (textBoxInitialHeight + textBoxDistanceBetweenY)),
+                textBoxInitialWidth,
+                textBoxInitialHeight, false, "Editable text");
+        }
